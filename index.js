@@ -1,14 +1,6 @@
-
-
-$(document).ready(function(){
   marked.setOptions({
   renderer: new marked.Renderer(),
-  // highlight: function(code, lang) {
-  //   const hljs = require('highlight.js');
-  //   const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-  //   return hljs.highlight(code, { language }).value;
-  //},
-  langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+  langPrefix: 'hljs language-',
   pedantic: false,
   gfm: true,
   breaks: true,
@@ -47,19 +39,14 @@ Click on this [link](https://www.polymerdatabase.com/main.html) for an encyclope
 3. Elastomers
 
 ![Material Informatics](https://scx1.b-cdn.net/csz/news/800a/2017/blockcopolym.jpg)
-`
-;
+`;
+  let editorBox = document.getElementById('editor');
+  let previewBox = document.getElementById("preview");
 
-$("#editor").val(inputText);
-document.getElementById("preview").innerHTML =
-  marked.parse(inputText);
+editorBox.innerHTML = inputText;
+previewBox.innerHTML = marked.parse(inputText);
 
-
-  $("#editor").keyup(function(){
-    let add = $(this).val();
-    let addmarked = marked.parse(add);
-    $("#preview").html(addmarked);
-});
-
-
-});
+editorBox.addEventListener('keyup', function(){
+  let add = $("#editor").val();
+  previewBox.innerHTML = marked.parse(add);
+})
